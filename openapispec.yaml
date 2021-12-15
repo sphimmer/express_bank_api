@@ -1,0 +1,236 @@
+openapi: 3.0.0
+servers:
+  - url: http://localhost:8080
+    description: ''
+    variables: {}
+info:
+  version: '1'
+  title: bank
+paths:
+  /customers:
+    post:
+      summary: Create Customer
+      operationId: CreateCustomer
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Customer'
+      requestBody:
+        $ref: '#/components/requestBodies/CustomerBody'
+  /customers/{customerId}:
+    parameters: 
+      - name: "customerId"
+        in: "path"
+        description: "ID of customer"
+        required: true
+        schema:
+          type: integer
+          format: int64
+    get:
+      summary: Get Customer
+      operationId: GetCustomer
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Customer'
+            
+    put:
+      summary: Update Customer
+      operationId: UpdateCustomer
+      
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Customer'
+      requestBody:
+        $ref: '#/components/requestBodies/CustomerBody'
+  /customers/{customerId}/accounts:
+    parameters: 
+      - name: "customerId"
+        in: "path"
+        description: "ID of customer"
+        required: true
+        schema:
+          type: integer
+          format: int64
+    post:
+      summary: Create Account
+      operationId: CreateAccount
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/AccountCreate'
+      requestBody:
+        $ref: '#/components/requestBodies/AccountBody'
+    get:
+      summary: Get Accounts
+      operationId: GetAccounts
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/AccountList'
+  /customers/{customerId}/accounts/{accountId}:
+    parameters: 
+      - name: "customerId"
+        in: "path"
+        description: "ID of customer"
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: "accountId"
+        in: "path"
+        description: "ID of customer"
+        required: true
+        schema:
+          type: integer
+          format: int64
+    get:
+      summary: Get Account By ID
+      operationId: GetAccountByID
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Account'
+  /customers/{customerId}/accounts/{accountId}/transfers:
+    parameters: 
+      - name: "customerId"
+        in: "path"
+        description: "ID of customer"
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: "accountId"
+        in: "path"
+        description: "ID of customer"
+        required: true
+        schema:
+          type: integer
+          format: int64
+    post:
+      summary: Create Transfer
+      operationId: CreateTransfer
+      
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      requestBody:
+        $ref: '#/components/requestBodies/TransferBody'
+    get:
+      summary: Get All Transfers
+      operationId: GetAllTransfers
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/TransferList'
+components:
+  requestBodies:
+    CustomerBody:
+      description: A JSON object containing Customer information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Customer'
+    AccountBody:
+      description: A JSON object with needed account data
+      required: true
+      content:
+        appliaction/json:
+          schema:
+            type: object
+            properties:
+              balance: 
+                type: number
+    TransferBody:
+      description: A JSON object with needed transfer data
+      required: true
+      content:
+        appliaction/json:
+          schema:
+            type: object
+            properties:
+              toAccount: 
+                type: integer
+              amount:
+                type: number
+  schemas:
+    TransferList:
+      type: array
+      items: 
+        $ref: '#/components/schemas/Transfer'
+    Transfer:
+      type: object
+      properties:
+        id: 
+          type: integer
+        amount:
+          type: number
+        toAccount:
+          $ref: '#/components/schemas/Account'
+    AccountList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Account'
+    Account:
+      type: object
+      properties:
+        id: 
+          type: integer
+        balance:
+          type: number
+    AccountCreate:
+      type: object
+      properties:
+        id: 
+          type: integer
+        balance:
+          type: number
+        customer: 
+          type: object
+          properties:
+            id:
+              type: integer
+    Customer:
+      type: object
+      properties:
+        firstName: 
+          type: string
+        lastName: 
+          type: string
+        email: 
+          type: string
+        SSN: 
+          type: string
+security: []
+tags: []

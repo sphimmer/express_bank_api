@@ -1,0 +1,39 @@
+{
+  "name": "bankapi",
+  "version": "1.0.0",
+  "description": "Your assignment is to build an internal API for a fake financial institution using Node and any framework.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && node dist/src/app.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://jupiterone-ctdzpj@git.codesubmit.io/jupiterone/s-himmer-banking-api-1-phjpuq"
+  },
+  "author": "Stuart Himmer",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/body-parser": "^1.19.2",
+    "@types/express": "^4.17.13",
+    "@types/faker": "^5.5.9",
+    "@types/jest": "^27.0.3",
+    "@types/node": "^16.11.12",
+    "faker": "^5.5.3",
+    "jest": "^27.4.4",
+    "typescript": "^4.5.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "class-validator": "^0.13.2",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "pg": "^8.7.1",
+    "pg-connection-string": "^2.5.0",
+    "reflect-metadata": "^0.1.13",
+    "ts-jest": "^27.1.1",
+    "typedi": "^0.10.0",
+    "typeorm": "^0.2.41"
+  }
+}
